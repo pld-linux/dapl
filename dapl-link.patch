@@ -1,0 +1,26 @@
+--- dapl-2.0.33/Makefile.am.orig	2011-08-19 21:50:55.000000000 +0200
++++ dapl-2.0.33/Makefile.am	2011-09-11 07:42:56.516651249 +0200
+@@ -80,6 +80,7 @@
+ 				-I$(srcdir)/dapl/openib_common \
+ 				-I$(srcdir)/dapl/openib_cma \
+ 				-I$(srcdir)/dapl/openib_cma/linux
++dapl_udapl_libdaplofa_la_LIBADD = dat/udat/libdat2.la
+ endif
+ if DEFINE_SCM
+ dapl_udapl_libdaploscm_la_CFLAGS = $(AM_CFLAGS) -D_GNU_SOURCE $(OSFLAGS) $(XFLAGS) \
+@@ -89,6 +90,7 @@
+ 				-I$(srcdir)/dapl/openib_common \
+                                 -I$(srcdir)/dapl/openib_scm \
+ 				-I$(srcdir)/dapl/openib_scm/linux
++dapl_udapl_libdaploscm_la_LIBADD = dat/udat/libdat2.la
+ endif
+ if DEFINE_UCM
+ dapl_udapl_libdaploucm_la_CFLAGS = $(AM_CFLAGS) -D_GNU_SOURCE $(OSFLAGS) $(XFLAGS) \
+@@ -98,6 +100,7 @@
+ 				-I$(srcdir)/dapl/openib_common \
+                                 -I$(srcdir)/dapl/openib_ucm \
+ 				-I$(srcdir)/dapl/openib_ucm/linux				
++dapl_udapl_libdaploucm_la_LIBADD = dat/udat/libdat2.la
+ endif
+ if HAVE_LD_VERSION_SCRIPT
+     dat_version_script = -Wl,--version-script=$(srcdir)/dat/udat/libdat2.map
