@@ -24,3 +24,22 @@
  endif
  if HAVE_LD_VERSION_SCRIPT
      dat_version_script = -Wl,--version-script=$(srcdir)/dat/udat/libdat2.map
+--- dapl-2.0.35/Makefile.am.orig	2012-06-04 18:20:09.059860993 +0200
++++ dapl-2.0.35/Makefile.am	2012-06-04 18:56:24.686436358 +0200
+@@ -52,7 +52,6 @@
+ 
+ sysconf_DATA = doc/dat.conf
+ 
+-datlibdir = $(libdir)
+ if DEFINE_CMA
+ dapllibofadir = $(libdir)
+ endif
+@@ -63,7 +62,7 @@
+ daplliboucmdir = $(libdir)
+ endif
+ 
+-datlib_LTLIBRARIES = dat/udat/libdat2.la
++lib_LTLIBRARIES = dat/udat/libdat2.la
+ if DEFINE_CMA
+ dapllibofa_LTLIBRARIES = dapl/udapl/libdaplofa.la
+ endif
