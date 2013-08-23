@@ -1,0 +1,11 @@
+--- dapl-2.0.38/test/dapltest/udapl/udapl_tdep.c.orig	2013-06-07 02:42:48.000000000 +0200
++++ dapl-2.0.38/test/dapltest/udapl/udapl_tdep.c	2013-08-23 22:07:43.793287069 +0200
+@@ -103,7 +103,7 @@
+ 	vsprintf(buffer, fmt, args);
+ 	va_end(args);
+ 
+-	printf(buffer);
++	fputs(buffer, stdout);
+ }
+ 
+ DAT_RETURN DT_Tdep_evd_dequeue(DAT_EVD_HANDLE evd_handle, DAT_EVENT * event)

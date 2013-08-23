@@ -9,6 +9,7 @@ Source0:	http://www.openfabrics.org/downloads/dapl/%{name}-%{version}.tar.gz
 # Source0-md5:	21b933fb24ed86d5c5413d9a269f913d
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-include.patch
+Patch2:		%{name}-format.patch
 URL:		http://www.openfabrics.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -59,6 +60,7 @@ Ten pakiet zawiera statyczną bibliotekę libdat2.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
