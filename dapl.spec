@@ -1,12 +1,12 @@
 Summary:	Userspace access to RDMA devices using OS-agnostic DAT APIs
 Summary(pl.UTF-8):	Dostęp z przestrzeni użytkownika do urządzeń RDMA poprzez API DAT
 Name:		dapl
-Version:	2.0.39
+Version:	2.0.40
 Release:	1
 License:	CPL v1.0 or BSD or GPL v2
 Group:		Libraries
 Source0:	http://www.openfabrics.org/downloads/dapl/%{name}-%{version}.tar.gz
-# Source0-md5:	9858bd36c4c21846a9c8a72bc0ad1339
+# Source0-md5:	7c6ef6e0573672ffb19f75db305b609c
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-include.patch
 Patch2:		%{name}-format.patch
