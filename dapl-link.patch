@@ -1,31 +1,5 @@
---- dapl-2.0.33/Makefile.am.orig	2011-08-19 21:50:55.000000000 +0200
-+++ dapl-2.0.33/Makefile.am	2011-09-11 07:42:56.516651249 +0200
-@@ -80,6 +80,7 @@
- 				-I$(srcdir)/dapl/openib_common \
- 				-I$(srcdir)/dapl/openib_cma \
- 				-I$(srcdir)/dapl/openib_cma/linux
-+dapl_udapl_libdaplofa_la_LIBADD = dat/udat/libdat2.la
- endif
- if DEFINE_SCM
- dapl_udapl_libdaploscm_la_CFLAGS = $(AM_CFLAGS) -D_GNU_SOURCE $(OSFLAGS) $(XFLAGS) \
-@@ -89,6 +90,7 @@
- 				-I$(srcdir)/dapl/openib_common \
-                                 -I$(srcdir)/dapl/openib_scm \
- 				-I$(srcdir)/dapl/openib_scm/linux
-+dapl_udapl_libdaploscm_la_LIBADD = dat/udat/libdat2.la
- endif
- if DEFINE_UCM
- dapl_udapl_libdaploucm_la_CFLAGS = $(AM_CFLAGS) -D_GNU_SOURCE $(OSFLAGS) $(XFLAGS) \
-@@ -98,6 +100,7 @@
- 				-I$(srcdir)/dapl/openib_common \
-                                 -I$(srcdir)/dapl/openib_ucm \
- 				-I$(srcdir)/dapl/openib_ucm/linux				
-+dapl_udapl_libdaploucm_la_LIBADD = dat/udat/libdat2.la
- endif
- if HAVE_LD_VERSION_SCRIPT
-     dat_version_script = -Wl,--version-script=$(srcdir)/dat/udat/libdat2.map
---- dapl-2.0.35/Makefile.am.orig	2012-06-04 18:20:09.059860993 +0200
-+++ dapl-2.0.35/Makefile.am	2012-06-04 18:56:24.686436358 +0200
+--- dapl-2.1.3/Makefile.am.orig	2014-11-21 17:55:46.000000000 +0100
++++ dapl-2.1.3/Makefile.am	2015-02-16 19:21:59.001701607 +0100
 @@ -52,7 +52,6 @@
  
  sysconf_DATA = doc/dat.conf
@@ -34,8 +8,8 @@
  if DEFINE_CMA
  dapllibofadir = $(libdir)
  endif
-@@ -63,7 +62,7 @@
- daplliboucmdir = $(libdir)
+@@ -66,7 +65,7 @@
+ dapllibomcmdir = $(libdir)
  endif
  
 -datlib_LTLIBRARIES = dat/udat/libdat2.la
@@ -43,3 +17,57 @@
  if DEFINE_CMA
  dapllibofa_LTLIBRARIES = dapl/udapl/libdaplofa.la
  endif
+@@ -163,7 +162,8 @@
+ 			dat/common/dat_init.c \
+ 			dat/common/dat_dr.c \
+ 			dat/common/dat_sr.c
+-dat_udat_libdat2_la_LDFLAGS = -version-info 2:0:0 $(dat_version_script) -ldl 
++dat_udat_libdat2_la_LDFLAGS = -version-info 2:0:0 $(dat_version_script)
++dat_udat_libdat2_la_LIBADD = -ldl 
+ 
+ if DEFINE_CMA
+ #
+@@ -278,8 +278,8 @@
+         dapl/openib_cma/device.c $(XPROGRAMS)
+ 
+ dapl_udapl_libdaplofa_la_LDFLAGS = -version-info 2:0:0 $(daplofa_version_script) \
+-				   -Wl,-init,dapl_init -Wl,-fini,dapl_fini \
+-				   -lpthread -libverbs -lrdmacm $(XLIBS)
++				   -Wl,-init,dapl_init -Wl,-fini,dapl_fini
++dapl_udapl_libdaplofa_la_LIBADD = dat/udat/libdat2.la -lpthread -libverbs -lrdmacm $(XLIBS)
+ endif
+ 
+ if DEFINE_SCM				
+@@ -395,8 +395,8 @@
+         dapl/openib_scm/device.c $(XPROGRAMS)
+ 
+ dapl_udapl_libdaploscm_la_LDFLAGS = -version-info 2:0:0 $(daploscm_version_script) \
+-                                   -Wl,-init,dapl_init -Wl,-fini,dapl_fini \
+-                                   -lpthread -libverbs $(XLIBS)
++                                   -Wl,-init,dapl_init -Wl,-fini,dapl_fini
++dapl_udapl_libdaploscm_la_LIBADD = dat/udat/libdat2.la -lpthread -libverbs -lrdmacm $(XLIBS)
+ endif
+ 
+ if DEFINE_UCM                      
+@@ -512,8 +512,8 @@
+         dapl/openib_ucm/device.c $(XPROGRAMS)
+ 
+ dapl_udapl_libdaploucm_la_LDFLAGS = -version-info 2:0:0 $(daploucm_version_script) \
+-                                   -Wl,-init,dapl_init -Wl,-fini,dapl_fini \
+-                                   -lpthread -libverbs $(XLIBS)
++                                   -Wl,-init,dapl_init -Wl,-fini,dapl_fini
++dapl_udapl_libdaploucm_la_LIBADD = dat/udat/libdat2.la -lpthread -libverbs -lrdmacm $(XLIBS)
+ endif
+ 
+ if DEFINE_MCM                      
+@@ -632,8 +632,8 @@
+         dapl/openib_mcm/device.c $(XPROGRAMS)
+ 
+ dapl_udapl_libdaplomcm_la_LDFLAGS = -version-info 2:0:0 $(daplomcm_version_script) \
+-                                   -Wl,-init,dapl_init -Wl,-fini,dapl_fini \
+-                                   -lpthread -libverbs -lscif $(XLIBS)
++                                   -Wl,-init,dapl_init -Wl,-fini,dapl_fini
++dapl_udapl_libdaplomcm_la_LIBADD = dat/udat/libdat2.la -lpthread -libverbs -lscif $(XLIBS)
+ endif
+ 
+ libdatincludedir = $(includedir)/dat2

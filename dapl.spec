@@ -1,18 +1,20 @@
+# TODO: --enable-mcm (BR: libscif), --enable-coll-type=fca (BR: libfca)
 Summary:	Userspace access to RDMA devices using OS-agnostic DAT APIs
 Summary(pl.UTF-8):	Dostęp z przestrzeni użytkownika do urządzeń RDMA poprzez API DAT
 Name:		dapl
-Version:	2.1.2
+Version:	2.1.3
 Release:	1
 License:	CPL v1.0 or BSD or GPL v2
 Group:		Libraries
 Source0:	https://www.openfabrics.org/downloads/dapl/%{name}-%{version}.tar.gz
-# Source0-md5:	dd757dec11cb23702aea8474e76a0037
+# Source0-md5:	04537bdd405b89c562d73bfdd6027c2b
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-include.patch
 Patch2:		%{name}-format.patch
 URL:		http://www.openfabrics.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
+BuildRequires:	ibacm-devel
 BuildRequires:	libibverbs-devel >= 1.1.4
 BuildRequires:	librdmacm-devel
 BuildRequires:	libtool
@@ -69,6 +71,7 @@ Ten pakiet zawiera statyczną bibliotekę libdat2.
 %{__autoheader}
 %{__automake}
 %configure \
+	--enable-acm \
 	--disable-silent-rules
 %{__make}
 
@@ -94,6 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/dapltest
 %attr(755,root,root) %{_bindir}/dtest
 %attr(755,root,root) %{_bindir}/dtestcm
+%attr(755,root,root) %{_bindir}/dtestsrq
 %attr(755,root,root) %{_bindir}/dtestx
 %attr(755,root,root) %{_libdir}/libdat2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libdat2.so.2
