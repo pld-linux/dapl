@@ -1,0 +1,21 @@
+--- dapl-2.1.5/dapl/openib_cma/dapl_ib_util.h.orig	2015-05-26 19:23:12.000000000 +0200
++++ dapl-2.1.5/dapl/openib_cma/dapl_ib_util.h	2015-06-16 20:44:38.922577552 +0200
+@@ -107,6 +107,7 @@
+ 	struct	ibv_context	*ib_ctx;
+ 	struct	ibv_device	*ib_dev;
+ 	/* dapls_modify_qp_state */
++	uint16_t                lid;
+ 	ib_cm_attr_t		ib_cm;  /* dev attr for QP and CM */
+ 	uint64_t		guid;
+ 	char			guid_str[32];
+--- dapl-2.1.5/dapl/openib_common/qp.c.orig	2015-05-26 19:23:15.000000000 +0200
++++ dapl-2.1.5/dapl/openib_common/qp.c	2015-06-16 20:03:11.882681921 +0200
+@@ -575,7 +575,7 @@
+ {
+ 	struct rdma_addrinfo hint, *res;
+ 	struct ibv_path_record path;
+-	uint8_t sl = hca_ptr->ib_trans.sl;
++	uint8_t sl = hca_ptr->ib_trans.ib_cm.sl;
+ 	int ret;
+ 
+ 	memset(&path, 0, sizeof path);
